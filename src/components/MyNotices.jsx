@@ -5,7 +5,7 @@ const MyNotices = ({ myNotices }) => {
     <div>
       <h2>My Notices</h2>
       <ul>
-        {myNotices.map((notice) => (
+        {myNotices?.map((notice) => (
           <li key={notice._id}>
             <strong>{notice.title}</strong>
             <p>{notice.body}</p>

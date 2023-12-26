@@ -1,46 +1,55 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
-import HomePage from "./pages/HomePage";
-import MyNoticesPage from "./pages/MyNoticesPage";
+import "./App.css";
+import { Route, Link, Routes } from "react-router-dom";
+import SignupPage from "./Pages/SignupPage";
+import LoginPage from "./Pages/LoginPage";
+import HomePage from "./Pages/HomePage";
+import MyNoticesPage from "./Pages/MyNoticesPage";
+import { useState } from "react";
 
-const App = () => {
-  const [user, setUser] = useState(null);
+function App() {
+  const tokenexist = JSON.parse(localStorage.getItem("token")) ? true : false;
+  const [Islogin, setIsLogin] = useState(tokenexist);
 
-  const handleSignup = async (formData) => {
-    // Add signup logic (use API calls or dummy data)
-  };
-
-  const handleLogin = async (formData) => {
-    // Add login logic (use API calls or dummy data)
-  };
-
-  const handleLogout = () => {
-    // Add logout logic
-    setUser(null);
-  };
-
+  function handlelogout() {
+    localStorage.clear();
+    setIsLogin(false);
+  }
   return (
-    <Router>
-      <Route path="/signup">
-        {user ? <Redirect to="/" /> : <SignupPage onSignup={handleSignup} />}
-      </Route>
-      <Route path="/login">
-        {user ? <Redirect to="/" /> : <LoginPage onLogin={handleLogin} />}
-      </Route>
-      <Route path="/" exact>
-        {user ? (
-          <HomePage user={user} onLogout={handleLogout} />
-        ) : (
-          <Redirect to="/login" />
-        )}
-      </Route>
-      <Route path="/my-notices">
-        {user ? <MyNoticesPage user={user} /> : <Redirect to="/login" />}
-      </Route>
-    </Router>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+
+          <li>
+            <Link to="/my-notices">my-notices</Link>
+          </li>
+          {!Islogin ? (
+            <div>
+              <li>
+                <Link to="/signup">Sign up</Link>
+              </li>
+              <li>
+                <Link to="/login">Log in</Link>
+              </li>
+            </div>
+          ) : (
+            <Link onClick={handlelogout}>Log out</Link>
+          )}
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/home" element={<HomePage Islogin={Islogin} />} />
+        <Route path="/" element={<HomePage Islogin={Islogin} />} />
+
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage setIsLogin={setIsLogin} />} />
+
+        <Route path="/my-notices" element={<MyNoticesPage />} />
+      </Routes>
+    </div>
   );
-};
+}
 
 export default App;

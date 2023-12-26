@@ -1,11 +1,11 @@
 import React from "react";
 
-const NoticeList = ({ notices }) => {
+const NoticeList = ({ myNotices }) => {
   return (
     <div>
       <h2>Notices</h2>
       <ul>
-        {notices.map((notice) => (
+        {myNotices?.map((notice) => (
           <li key={notice._id}>
             <strong>{notice.title}</strong>
             <p>{notice.body}</p>

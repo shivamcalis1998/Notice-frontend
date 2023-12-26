@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from "react";
 import MyNotices from "../components/MyNotices";
+import axios from "axios";
 
-const MyNoticesPage = ({ user }) => {
+const headers = {
+  "Content-Type": "application/json",
+  authorization: JSON.parse(localStorage.getItem("token")) || null,
+};
+
+const MyNoticesPage = () => {
   const [myNotices, setMyNotices] = useState([]);
 
   useEffect(() => {
-    // Fetch user's notices logic (use API calls or dummy data)
+    getNotices();
   }, []);
+
+  async function getNotices() {
+    const user = JSON.parse(localStorage.getItem("userPro")) || null;
+
+    try {
+      const data = await axios.get(
+        `https://notice-backend-btw0.onrender.com/notices/${user._id}`,
+        { headers }
+      );
+
+      setMyNotices(data.data);
+    } catch (error) {
+      console.log("something went wrong");
+    }
+  }
 
   return (
     <div>
       <h1>My Notices</h1>
-      <MyNotices myNotices={myNotices} />
+      <MyNotices myNotices={myNotices} setMyNotices={setMyNotices} />
     </div>
   );
 };

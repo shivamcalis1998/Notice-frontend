@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SignupForm = ({ onSignup }) => {
+const SignupForm = ({ Signup }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,7 +16,7 @@ const SignupForm = ({ onSignup }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add form submission logic
-    onSignup(formData);
+    Signup(formData);
   };
 
   return (
