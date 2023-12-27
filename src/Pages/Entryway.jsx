@@ -3,7 +3,7 @@ import LoginForm from "../components/LoginForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Entryway = ({ setIsLogin }) => {
+const Entryway = ({ setIsLogin, userInfo, setUserInfo }) => {
   const navigate = useNavigate();
 
   const Login = async (loginData) => {
@@ -15,6 +15,7 @@ const Entryway = ({ setIsLogin }) => {
 
       localStorage.setItem("token", JSON.stringify(user.data.token));
       localStorage.setItem("userPro", JSON.stringify(user.data.user));
+      setUserInfo({ token: user.data.token, user: user.data.user });
       navigate("/");
 
       setIsLogin(true);

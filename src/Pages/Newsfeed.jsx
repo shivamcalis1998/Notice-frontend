@@ -2,20 +2,18 @@ import React, { useState, useEffect } from "react";
 import MyNotices from "../components/MyNotices";
 import axios from "axios";
 
-const headers = {
-  "Content-Type": "application/json",
-  authorization: JSON.parse(localStorage.getItem("token")) || null,
-};
-
-const Newsfeed = () => {
+const Newsfeed = ({ userInfo }) => {
   const [myNotices, setMyNotices] = useState([]);
-
+  const headers = {
+    "Content-Type": "application/json",
+    authorization: userInfo.token,
+  };
   useEffect(() => {
     getNotices();
   }, []);
 
   async function getNotices() {
-    const user = JSON.parse(localStorage.getItem("userPro")) || null;
+    const user = userInfo.user;
 
     try {
       const data = await axios.get(
@@ -32,7 +30,7 @@ const Newsfeed = () => {
   return (
     <div>
       <h1>My Notices</h1>
-      <MyNotices myNotices={myNotices} setMyNotices={setMyNotices} />
+      <MyNotices userInfo={userInfo} myNotices={myNotices} setMyNotices={setMyNotices} />
     </div>
   );
 };
