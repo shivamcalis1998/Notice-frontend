@@ -3,7 +3,7 @@ import LoginForm from "../components/LoginForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = ({ setIsLogin }) => {
+const Entryway = ({ setIsLogin }) => {
   const navigate = useNavigate();
 
   const Login = async (loginData) => {
@@ -30,4 +30,4 @@ const LoginPage = ({ setIsLogin }) => {
   );
 };
 
-export default LoginPage;
+export default Entryway;

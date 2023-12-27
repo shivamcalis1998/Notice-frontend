@@ -3,7 +3,7 @@ import NoticeList from "../components/NoticeList";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const HomePage = ({ Islogin }) => {
+const Dashboard = ({ Islogin }) => {
   const [notices, setNotices] = useState([]);
 
   const headers = {
@@ -30,10 +30,10 @@ const HomePage = ({ Islogin }) => {
 
   return (
     <div>
-      <h1>Welcome notices </h1>
+      <h1>Welcome notices</h1>
       {Islogin && <NoticeList myNotices={notices} />}
     </div>
   );
 };
 
-export default HomePage;
+export default Dashboard;

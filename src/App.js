@@ -1,9 +1,9 @@
 import "./App.css";
 import { Route, Link, Routes } from "react-router-dom";
-import SignupPage from "./Pages/SignupPage";
-import LoginPage from "./Pages/LoginPage";
-import HomePage from "./Pages/HomePage";
-import MyNoticesPage from "./Pages/MyNoticesPage";
+import Registration from "./Pages/Registration";
+import Entryway from "./Pages/Entryway";
+import Dashboard from "./Pages/Dashboard";
+import Newsfeed from "./Pages/Newsfeed";
 import { useState } from "react";
 
 function App() {
@@ -40,13 +40,13 @@ function App() {
         </ul>
       </nav>
       <Routes>
-        <Route path="/home" element={<HomePage Islogin={Islogin} />} />
-        <Route path="/" element={<HomePage Islogin={Islogin} />} />
+        <Route path="/home" element={<Dashboard Islogin={Islogin} />} />
+        <Route path="/" element={<Dashboard Islogin={Islogin} />} />
 
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage setIsLogin={setIsLogin} />} />
+        <Route path="/signup" element={<Registration />} />
+        <Route path="/login" element={<Entryway setIsLogin={setIsLogin} />} />
 
-        <Route path="/my-notices" element={<MyNoticesPage />} />
+        <Route path="/my-notices" element={<Newsfeed />} />
       </Routes>
     </div>
   );

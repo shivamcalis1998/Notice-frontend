@@ -7,7 +7,7 @@ const headers = {
   authorization: JSON.parse(localStorage.getItem("token")) || null,
 };
 
-const MyNoticesPage = () => {
+const Newsfeed = () => {
   const [myNotices, setMyNotices] = useState([]);
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const MyNoticesPage = () => {
   );
 };
 
-export default MyNoticesPage;
+export default Newsfeed;
